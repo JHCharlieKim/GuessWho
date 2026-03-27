@@ -12,6 +12,7 @@ struct GuessWhoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.locale, AppLanguage.current.locale)
         }
     }
 }

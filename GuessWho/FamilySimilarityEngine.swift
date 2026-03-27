@@ -19,11 +19,11 @@ enum FaceAnalysisError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .failedToLoadImage:
-            return "사진을 읽을 수 없어요."
+            return L10n.string(.faceErrorLoadImage)
         case .faceNotFound:
-            return "얼굴을 찾지 못했어요. 정면에 가깝고 선명한 사진으로 다시 시도해주세요."
+            return L10n.string(.faceErrorNotFound)
         case .invalidEmbedding:
-            return "얼굴 특징을 추출하지 못했어요."
+            return L10n.string(.faceErrorInvalidEmbedding)
         }
     }
 }
@@ -263,7 +263,7 @@ struct VisionFaceEmbeddingExtractor: FaceEmbeddingExtracting {
         let faceArea = Double(faceObservation.boundingBox.width * faceObservation.boundingBox.height)
         if faceArea < 0.08 {
             score -= 0.35
-            notes.append("얼굴이 너무 작아요")
+            notes.append(L10n.string(.qualityFaceTooSmall))
         } else if faceArea < 0.14 {
             score -= 0.18
         }
@@ -272,19 +272,19 @@ struct VisionFaceEmbeddingExtractor: FaceEmbeddingExtracting {
         let centerednessY = abs(Double(faceObservation.boundingBox.midY) - 0.5)
         if centerednessX > 0.24 || centerednessY > 0.28 {
             score -= 0.2
-            notes.append("얼굴이 화면 중앙에서 벗어나 있어요")
+            notes.append(L10n.string(.qualityFaceOffCenter))
         }
 
         let aspectRatio = Double(faceObservation.boundingBox.height / max(faceObservation.boundingBox.width, 0.001))
         if aspectRatio < 0.9 || aspectRatio > 1.8 {
             score -= 0.12
-            notes.append("얼굴 각도가 커 보여요")
+            notes.append(L10n.string(.qualityFaceAngleLarge))
         }
 
         let sharpness = estimatedSharpness(for: croppedFace)
         if sharpness < 0.035 {
             score -= 0.3
-            notes.append("사진이 흐릿해요")
+            notes.append(L10n.string(.qualityImageBlurry))
         } else if sharpness < 0.06 {
             score -= 0.15
         }
@@ -292,7 +292,7 @@ struct VisionFaceEmbeddingExtractor: FaceEmbeddingExtracting {
         let brightness = estimatedBrightness(for: croppedFace)
         if brightness < 0.18 || brightness > 0.9 {
             score -= 0.12
-            notes.append("조명이 좋지 않아요")
+            notes.append(L10n.string(.qualityLightingPoor))
         }
 
         let clamped = max(0.0, min(1.0, score))

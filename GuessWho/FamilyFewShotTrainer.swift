@@ -31,11 +31,11 @@ final class UpdatableFamilyFewShotTrainer: FamilyFewShotTraining {
 
     func updateModel(fatherSamples: [FaceSample], motherSamples: [FaceSample]) async -> String {
         guard fatherSamples.count >= 3, motherSamples.count >= 3 else {
-            return "Few Shot 학습은 부모 사진이 각각 3장 이상일 때 시작돼요."
+            return L10n.string(.fewShotNeedsMinimumSamples)
         }
 
         guard let sourceModelURL = Bundle.main.url(forResource: Constants.modelName, withExtension: "mlmodelc") else {
-            return "업데이트 가능한 Core ML Few Shot 모델 파일이 아직 프로젝트에 추가되지 않았어요."
+            return L10n.string(.fewShotModelMissing)
         }
 
         do {
@@ -47,9 +47,9 @@ final class UpdatableFamilyFewShotTrainer: FamilyFewShotTraining {
                 sourceModelURL: sourceModelURL,
                 trainingData: trainingData
             )
-            return "부모 사진으로 온디바이스 Few Shot 학습을 완료했어요. 이 실행 중에는 학습 결과를 바로 사용합니다."
+            return L10n.string(.fewShotTrainingComplete)
         } catch {
-            return "Few Shot 학습에 실패했어요: \(error.localizedDescription)"
+            return L10n.format(.fewShotTrainingFailed, error.localizedDescription)
         }
     }
 
@@ -84,7 +84,7 @@ final class UpdatableFamilyFewShotTrainer: FamilyFewShotTraining {
         }
 
         guard let sourceModelURL = Bundle.main.url(forResource: Constants.modelName, withExtension: "mlmodelc") else {
-            throw NSError(domain: "GuessWho.FewShot", code: 404, userInfo: [NSLocalizedDescriptionKey: "Few Shot 모델이 없어요."])
+            throw NSError(domain: "GuessWho.FewShot", code: 404, userInfo: [NSLocalizedDescriptionKey: L10n.string(.fewShotModelUnavailable)])
         }
 
         return try MLModel(contentsOf: sourceModelURL, configuration: modelConfiguration)

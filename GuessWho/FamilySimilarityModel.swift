@@ -20,9 +20,9 @@ enum ParentRole: String, CaseIterable, Identifiable, Codable {
     var displayName: String {
         switch self {
         case .father:
-            return "아빠"
+            return L10n.string(.parentFather)
         case .mother:
-            return "엄마"
+            return L10n.string(.parentMother)
         }
     }
 }

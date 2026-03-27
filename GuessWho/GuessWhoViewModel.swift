@@ -8,6 +8,40 @@
 import Combine
 import Foundation
 
+enum ProcessingStage: Equatable {
+    case analyzingParent(ParentRole)
+    case updatingTraining(ParentRole)
+    case extractingChildFeatures
+    case removingParent(ParentRole)
+    case comparing
+
+    var title: String {
+        switch self {
+        case .analyzingParent, .extractingChildFeatures:
+            return L10n.string(.processingTitleCheckingFace)
+        case .updatingTraining, .removingParent:
+            return L10n.string(.processingTitleUpdatingPhotos)
+        case .comparing:
+            return L10n.string(.processingTitleCalculatingResult)
+        }
+    }
+
+    var message: String {
+        switch self {
+        case let .analyzingParent(role):
+            return L10n.format(.processingMessageAnalyzeParent, role.displayName)
+        case let .updatingTraining(role):
+            return L10n.format(.processingMessageUpdateTraining, role.displayName)
+        case .extractingChildFeatures:
+            return L10n.string(.processingMessageExtractChild)
+        case let .removingParent(role):
+            return L10n.format(.processingMessageRemoveParent, role.displayName)
+        case .comparing:
+            return L10n.string(.processingMessageCompare)
+        }
+    }
+}
+
 struct UserNotice: Equatable, Identifiable {
     enum Style: Equatable {
         case info
@@ -29,9 +63,10 @@ final class GuessWhoViewModel: ObservableObject {
     @Published private(set) var motherModel: TrainedParentModel?
     @Published private(set) var latestSummary: SimilaritySummary?
     @Published private(set) var isProcessing = false
+    @Published private(set) var processingStage: ProcessingStage?
     @Published private(set) var processingMessage: String?
     @Published private(set) var lastErrorMessage: String?
-    @Published private(set) var fewShotStatusMessage = "사진 학습 준비 전"
+    @Published private(set) var fewShotStatusMessage = L10n.string(.fewShotIdle)
     @Published var transientNotice: UserNotice?
 
     private let extractor: FaceEmbeddingExtracting
@@ -83,21 +118,27 @@ final class GuessWhoViewModel: ObservableObject {
         fatherReady && motherReady && childSample != nil
     }
 
+    var processingTitle: String {
+        processingStage?.title ?? L10n.string(.processingTitlePreparingPhotos)
+    }
+
     var childQualityWarning: String? {
         guard let childSample, !childSample.isRecommendedForTraining else { return nil }
         if childSample.qualityNotes.isEmpty {
-            return "자녀 사진 품질이 낮아 결과가 부정확할 수 있어요."
+            return L10n.string(.childQualityLow)
         }
-        return "자녀 사진 품질이 낮아 결과가 흔들릴 수 있어요: \(childSample.qualityNotes.joined(separator: ", "))"
+        return L10n.format(.childQualityLowWithNotes, childSample.qualityNotes.joined(separator: ", "))
     }
 
     func addSamples(from imageDatas: [Data], to role: ParentRole) async {
         guard !imageDatas.isEmpty else { return }
 
         isProcessing = true
-        processingMessage = "\(role.displayName) 사진을 분석하고 있어요..."
+        processingStage = .analyzingParent(role)
+        processingMessage = processingStage?.message
         defer {
             isProcessing = false
+            processingStage = nil
             processingMessage = nil
         }
 
@@ -111,7 +152,7 @@ final class GuessWhoViewModel: ObservableObject {
                 let sample = try extractor.makeSample(
                     from: data,
                     role: role,
-                    name: "\(role.displayName) 사진 \(startingCount + index + 1)"
+                    name: L10n.format(.sampleParentName, role.displayName, startingCount + index + 1)
                 )
                 addedSamples.append(sample)
             } catch {
@@ -131,16 +172,17 @@ final class GuessWhoViewModel: ObservableObject {
         let excludedSamples = addedSamples.filter { !$0.isRecommendedForTraining }
         if !excludedSamples.isEmpty {
             transientNotice = UserNotice(
-                title: "\(role.displayName) 사진 일부가 학습에서 제외됐어요",
+                title: L10n.format(.noticeExcludedSomePhotosTitle, role.displayName),
                 message: excludedSamples.count == addedSamples.count
-                    ? "올린 사진이 기준에 맞지 않아 학습에 반영되지 않았어요. 더 선명한 정면 사진으로 다시 시도해주세요."
-                    : "\(excludedSamples.count)장이 기준에 맞지 않아 제외됐어요. 남은 사진으로는 계속 학습을 진행합니다.",
+                    ? L10n.string(.noticeExcludedAllPhotosMessage)
+                    : L10n.format(.noticeExcludedPartialPhotosMessage, excludedSamples.count),
                 style: .warning
             )
         }
 
         retrainIfPossible()
-        processingMessage = "\(role.displayName) 사진으로 학습 상태를 업데이트하고 있어요..."
+        processingStage = .updatingTraining(role)
+        processingMessage = processingStage?.message
         await refreshFewShotTraining()
         persist()
     }
@@ -149,9 +191,11 @@ final class GuessWhoViewModel: ObservableObject {
         guard let imageData else { return }
 
         isProcessing = true
-        processingMessage = "자녀 사진에서 얼굴 특징을 추출하고 있어요..."
+        processingStage = .extractingChildFeatures
+        processingMessage = processingStage?.message
         defer {
             isProcessing = false
+            processingStage = nil
             processingMessage = nil
         }
 
@@ -162,7 +206,7 @@ final class GuessWhoViewModel: ObservableObject {
             childSample = try extractor.makeSample(
                 from: imageData,
                 role: nil,
-                name: "자녀 사진 \(ordinal)"
+                name: L10n.format(.sampleChildName, ordinal)
             )
             latestSummary = nil
             persist()
@@ -173,9 +217,11 @@ final class GuessWhoViewModel: ObservableObject {
 
     func removeSample(_ sample: FaceSample, from role: ParentRole) async {
         isProcessing = true
-        processingMessage = "\(role.displayName) 사진을 제외하고 다시 정리하고 있어요..."
+        processingStage = .removingParent(role)
+        processingMessage = processingStage?.message
         defer {
             isProcessing = false
+            processingStage = nil
             processingMessage = nil
         }
 
@@ -200,15 +246,17 @@ final class GuessWhoViewModel: ObservableObject {
             let fatherModel,
             let motherModel
         else {
-            lastErrorMessage = "부모 사진 3장씩과 자녀 사진이 모두 준비되어야 해요."
+            lastErrorMessage = L10n.string(.analyzeRequirementsMissing)
             latestSummary = nil
             return nil
         }
 
         isProcessing = true
-        processingMessage = "부모 모델과 자녀 사진을 비교하는 중이에요..."
+        processingStage = .comparing
+        processingMessage = processingStage?.message
         defer {
             isProcessing = false
+            processingStage = nil
             processingMessage = nil
         }
 
@@ -234,8 +282,9 @@ final class GuessWhoViewModel: ObservableObject {
         motherModel = nil
         latestSummary = nil
         lastErrorMessage = nil
-        fewShotStatusMessage = "디버그 초기화 완료"
+        fewShotStatusMessage = L10n.string(.resetDebugCompleted)
         processingMessage = nil
+        processingStage = nil
         fewShotTrainer.reset()
         store.reset()
     }

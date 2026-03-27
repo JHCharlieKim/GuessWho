@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>GuessWho</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>부모와 자녀 사진을 기기 안에서만 분석해 닮은 정도를 계산하기 위해 사진 접근 권한이 필요합니다.</string>
+	<string>Photo access is required to analyze parent and child photos on this device and compare facial similarity.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
