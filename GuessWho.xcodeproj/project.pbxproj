@@ -6,20 +6,81 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CB87314C2F70EAC6000105DD /* FamilyFewShotClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CB87314B2F70EAC6000105DD /* FamilyFewShotClassifier.mlmodel */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CB87311C2F70C70E000105DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB8731022F70C70C000105DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB8731092F70C70C000105DD;
+			remoteInfo = GuessWho;
+		};
+		CB8731262F70C70E000105DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB8731022F70C70C000105DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB8731092F70C70C000105DD;
+			remoteInfo = GuessWho;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		CB489C772E4EA73D007F07FA /* GuessWho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessWho.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB87310A2F70C70C000105DD /* GuessWho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessWho.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB87311B2F70C70E000105DD /* GuessWhoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessWhoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB8731252F70C70E000105DD /* GuessWhoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessWhoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB87314B2F70EAC6000105DD /* FamilyFewShotClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FamilyFewShotClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CB87312D2F70C70E000105DD /* Exceptions for "GuessWho" folder in "GuessWho" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CB8731092F70C70C000105DD /* GuessWho */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CB489C792E4EA73D007F07FA /* GuessWho */ = {
+		CB87310C2F70C70C000105DD /* GuessWho */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CB87312D2F70C70E000105DD /* Exceptions for "GuessWho" folder in "GuessWho" target */,
+			);
 			path = GuessWho;
+			sourceTree = "<group>";
+		};
+		CB87311E2F70C70E000105DD /* GuessWhoTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GuessWhoTests;
+			sourceTree = "<group>";
+		};
+		CB8731282F70C70E000105DD /* GuessWhoUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GuessWhoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CB489C742E4EA73D007F07FA /* Frameworks */ = {
+		CB8731072F70C70C000105DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731182F70C70E000105DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731222F70C70E000105DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,18 +90,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CB489C6E2E4EA73D007F07FA = {
+		CB8731012F70C70C000105DD = {
 			isa = PBXGroup;
 			children = (
-				CB489C792E4EA73D007F07FA /* GuessWho */,
-				CB489C782E4EA73D007F07FA /* Products */,
+				CB87310C2F70C70C000105DD /* GuessWho */,
+				CB87311E2F70C70E000105DD /* GuessWhoTests */,
+				CB8731282F70C70E000105DD /* GuessWhoUITests */,
+				CB87310B2F70C70C000105DD /* Products */,
+				CB87314B2F70EAC6000105DD /* FamilyFewShotClassifier.mlmodel */,
 			);
 			sourceTree = "<group>";
 		};
-		CB489C782E4EA73D007F07FA /* Products */ = {
+		CB87310B2F70C70C000105DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB489C772E4EA73D007F07FA /* GuessWho.app */,
+				CB87310A2F70C70C000105DD /* GuessWho.app */,
+				CB87311B2F70C70E000105DD /* GuessWhoTests.xctest */,
+				CB8731252F70C70E000105DD /* GuessWhoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +114,134 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CB489C762E4EA73D007F07FA /* GuessWho */ = {
+		CB8731092F70C70C000105DD /* GuessWho */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CB489C822E4EA73F007F07FA /* Build configuration list for PBXNativeTarget "GuessWho" */;
+			buildConfigurationList = CB87312E2F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWho" */;
 			buildPhases = (
-				CB489C732E4EA73D007F07FA /* Sources */,
-				CB489C742E4EA73D007F07FA /* Frameworks */,
-				CB489C752E4EA73D007F07FA /* Resources */,
+				CB8731062F70C70C000105DD /* Sources */,
+				CB8731072F70C70C000105DD /* Frameworks */,
+				CB8731082F70C70C000105DD /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				CB489C792E4EA73D007F07FA /* GuessWho */,
+				CB87310C2F70C70C000105DD /* GuessWho */,
 			);
 			name = GuessWho;
 			packageProductDependencies = (
 			);
 			productName = GuessWho;
-			productReference = CB489C772E4EA73D007F07FA /* GuessWho.app */;
+			productReference = CB87310A2F70C70C000105DD /* GuessWho.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CB87311A2F70C70E000105DD /* GuessWhoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB8731332F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWhoTests" */;
+			buildPhases = (
+				CB8731172F70C70E000105DD /* Sources */,
+				CB8731182F70C70E000105DD /* Frameworks */,
+				CB8731192F70C70E000105DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB87311D2F70C70E000105DD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CB87311E2F70C70E000105DD /* GuessWhoTests */,
+			);
+			name = GuessWhoTests;
+			packageProductDependencies = (
+			);
+			productName = GuessWhoTests;
+			productReference = CB87311B2F70C70E000105DD /* GuessWhoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CB8731242F70C70E000105DD /* GuessWhoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB8731362F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWhoUITests" */;
+			buildPhases = (
+				CB8731212F70C70E000105DD /* Sources */,
+				CB8731222F70C70E000105DD /* Frameworks */,
+				CB8731232F70C70E000105DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB8731272F70C70E000105DD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CB8731282F70C70E000105DD /* GuessWhoUITests */,
+			);
+			name = GuessWhoUITests;
+			packageProductDependencies = (
+			);
+			productName = GuessWhoUITests;
+			productReference = CB8731252F70C70E000105DD /* GuessWhoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CB489C6F2E4EA73D007F07FA /* Project object */ = {
+		CB8731022F70C70C000105DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					CB489C762E4EA73D007F07FA = {
-						CreatedOnToolsVersion = 16.4;
+					CB8731092F70C70C000105DD = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					CB87311A2F70C70E000105DD = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = CB8731092F70C70C000105DD;
+					};
+					CB8731242F70C70E000105DD = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = CB8731092F70C70C000105DD;
 					};
 				};
 			};
-			buildConfigurationList = CB489C722E4EA73D007F07FA /* Build configuration list for PBXProject "GuessWho" */;
+			buildConfigurationList = CB8731052F70C70C000105DD /* Build configuration list for PBXProject "GuessWho" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = CB489C6E2E4EA73D007F07FA;
+			mainGroup = CB8731012F70C70C000105DD;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = CB489C782E4EA73D007F07FA /* Products */;
+			productRefGroup = CB87310B2F70C70C000105DD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CB489C762E4EA73D007F07FA /* GuessWho */,
+				CB8731092F70C70C000105DD /* GuessWho */,
+				CB87311A2F70C70E000105DD /* GuessWhoTests */,
+				CB8731242F70C70E000105DD /* GuessWhoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CB489C752E4EA73D007F07FA /* Resources */ = {
+		CB8731082F70C70C000105DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731192F70C70E000105DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731232F70C70E000105DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +251,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CB489C732E4EA73D007F07FA /* Sources */ = {
+		CB8731062F70C70C000105DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB87314C2F70EAC6000105DD /* FamilyFewShotClassifier.mlmodel in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731172F70C70E000105DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB8731212F70C70E000105DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -124,8 +275,89 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CB87311D2F70C70E000105DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB8731092F70C70C000105DD /* GuessWho */;
+			targetProxy = CB87311C2F70C70E000105DD /* PBXContainerItemProxy */;
+		};
+		CB8731272F70C70E000105DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB8731092F70C70C000105DD /* GuessWho */;
+			targetProxy = CB8731262F70C70E000105DD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		CB489C802E4EA73F007F07FA /* Debug */ = {
+		CB87312F2F70C70E000105DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GuessWho/GuessWho.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56625PEERJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuessWho/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWho;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB8731302F70C70E000105DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GuessWho/GuessWho.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56625PEERJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuessWho/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWho;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CB8731312F70C70E000105DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -178,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -189,7 +421,7 @@
 			};
 			name = Debug;
 		};
-		CB489C812E4EA73F007F07FA /* Release */ = {
+		CB8731322F70C70E000105DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -236,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -246,90 +478,130 @@
 			};
 			name = Release;
 		};
-		CB489C832E4EA73F007F07FA /* Debug */ = {
+		CB8731342F70C70E000105DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56625PEERJ;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "누구게";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.kids-games";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWho;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWhoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GuessWho.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GuessWho";
 			};
 			name = Debug;
 		};
-		CB489C842E4EA73F007F07FA /* Release */ = {
+		CB8731352F70C70E000105DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56625PEERJ;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "누구게";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.kids-games";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWho;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWhoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GuessWho.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GuessWho";
+			};
+			name = Release;
+		};
+		CB8731372F70C70E000105DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56625PEERJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWhoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GuessWho;
+			};
+			name = Debug;
+		};
+		CB8731382F70C70E000105DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56625PEERJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kim.charlie.GuessWhoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GuessWho;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CB489C722E4EA73D007F07FA /* Build configuration list for PBXProject "GuessWho" */ = {
+		CB8731052F70C70C000105DD /* Build configuration list for PBXProject "GuessWho" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CB489C802E4EA73F007F07FA /* Debug */,
-				CB489C812E4EA73F007F07FA /* Release */,
+				CB8731312F70C70E000105DD /* Debug */,
+				CB8731322F70C70E000105DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CB489C822E4EA73F007F07FA /* Build configuration list for PBXNativeTarget "GuessWho" */ = {
+		CB87312E2F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWho" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CB489C832E4EA73F007F07FA /* Debug */,
-				CB489C842E4EA73F007F07FA /* Release */,
+				CB87312F2F70C70E000105DD /* Debug */,
+				CB8731302F70C70E000105DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB8731332F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWhoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB8731342F70C70E000105DD /* Debug */,
+				CB8731352F70C70E000105DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB8731362F70C70E000105DD /* Build configuration list for PBXNativeTarget "GuessWhoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB8731372F70C70E000105DD /* Debug */,
+				CB8731382F70C70E000105DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = CB489C6F2E4EA73D007F07FA /* Project object */;
+	rootObject = CB8731022F70C70C000105DD /* Project object */;
 }

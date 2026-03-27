@@ -2,7 +2,7 @@
 //  GuessWhoApp.swift
 //  GuessWho
 //
-//  Created by Charlie Kim on 8/15/25.
+//  Created by Charlie Kim on 3/23/26.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct GuessWhoApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
         }
     }
 }
