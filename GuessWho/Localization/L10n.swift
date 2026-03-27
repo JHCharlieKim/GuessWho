@@ -165,6 +165,26 @@ enum L10n {
         case sampleQualityExcluded = "sample.quality.excluded"
         case sampleExcludedBadge = "sample.excluded.badge"
         case processingOverlayWait = "processing_overlay.wait"
+
+        case adLoadingTitle = "ad.loading.title"
+        case adLoadingMessage = "ad.loading.message"
+        case adResultGateTitle = "ad.result_gate.title"
+        case adResultGateMessage = "ad.result_gate.message"
+        case adResultGateRewardTitle = "ad.result_gate.reward.title"
+        case adResultGateRewardMessage = "ad.result_gate.reward.message"
+        case adResultGateConfirm = "ad.result_gate.confirm"
+        case adResultGateSkip = "ad.result_gate.skip"
+        case adResultGateSkippedTitle = "ad.result_gate.skipped.title"
+        case adResultGateSkippedMessage = "ad.result_gate.skipped.message"
+        case adResultGateUnavailableTitle = "ad.result_gate.unavailable.title"
+        case adResultGateUnavailableMessage = "ad.result_gate.unavailable.message"
+        case adBannerSponsored = "ad.banner.sponsored"
+        case adBannerPlaceholderTitle = "ad.banner.placeholder.title"
+        case adBannerPlaceholderMessage = "ad.banner.placeholder.message"
+        case adPrivacyEyebrow = "ad.privacy.eyebrow"
+        case adPrivacyTitle = "ad.privacy.title"
+        case adPrivacyDetail = "ad.privacy.detail"
+        case adPrivacyButton = "ad.privacy.button"
     }
 
     static func string(_ key: Key) -> String {

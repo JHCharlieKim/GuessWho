@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HelpTabView: View {
     let palette: AppPalette
+    @ObservedObject var monetization: MonetizationCoordinator
 
     var body: some View {
         NavigationStack {
@@ -11,7 +12,9 @@ struct HelpTabView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 22) {
                         photoGuideSection
+                        InlineBannerAdSlot(placement: .helpInline)
                         disclaimerSection
+                        privacySettingsSection
                         privacyNotice
                     }
                     .padding(.horizontal, 20)
@@ -77,5 +80,28 @@ struct HelpTabView: View {
             message: L10n.string(.privacyMessage),
             accent: palette.green
         )
+    }
+
+    @ViewBuilder
+    private var privacySettingsSection: some View {
+        if monetization.isPrivacyOptionsRequired {
+            VStack(alignment: .leading, spacing: 12) {
+                PageSectionHeader(
+                    eyebrow: L10n.string(.adPrivacyEyebrow),
+                    title: L10n.string(.adPrivacyTitle),
+                    detail: L10n.string(.adPrivacyDetail)
+                )
+
+                Button {
+                    Task {
+                        await monetization.presentPrivacyOptions()
+                    }
+                } label: {
+                    Text(L10n.string(.adPrivacyButton))
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(SecondaryButtonStyle(accent: palette.deepBlue))
+            }
+        }
     }
 }

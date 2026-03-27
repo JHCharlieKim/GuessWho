@@ -21,6 +21,7 @@ struct ContentView: View {
     }
 
     @StateObject private var viewModel = GuessWhoViewModel()
+    @StateObject private var monetization = MonetizationCoordinator()
     @State private var selectedTab: Tab = .home
 
     @State private var fatherPickerItems: [PhotosPickerItem] = []
@@ -29,6 +30,9 @@ struct ContentView: View {
 
     @State private var shouldShowResult = false
     @State private var shouldConfirmReset = false
+    @State private var shouldShowResultGateIntro = false
+    @State private var shouldPresentResultGateAdAfterIntroDismiss = false
+    @State private var isPresentingResultGateAd = false
     @State private var noticeDismissTask: Task<Void, Never>?
 
     private let palette = AppPalette()
@@ -81,7 +85,10 @@ struct ContentView: View {
             }
             .tag(Tab.training)
 
-            HelpTabView(palette: palette)
+            HelpTabView(
+                palette: palette,
+                monetization: monetization
+            )
                 .tabItem {
                     Label(L10n.string(.tabHelp), systemImage: "questionmark.circle.fill")
                 }
@@ -89,6 +96,23 @@ struct ContentView: View {
         }
         .sheet(isPresented: $shouldShowResult) {
             resultSheet
+        }
+        .sheet(isPresented: $shouldShowResultGateIntro, onDismiss: handleResultGateIntroDismiss) {
+            ResultGateIntroSheet(
+                onSkip: {
+                    shouldPresentResultGateAdAfterIntroDismiss = false
+                    shouldShowResultGateIntro = false
+                    viewModel.transientNotice = UserNotice(
+                        title: L10n.string(.adResultGateSkippedTitle),
+                        message: L10n.string(.adResultGateSkippedMessage),
+                        style: .info
+                    )
+                },
+                onConfirm: {
+                    shouldPresentResultGateAdAfterIntroDismiss = true
+                    shouldShowResultGateIntro = false
+                }
+            )
         }
         .alert(L10n.string(.alertResetTitle), isPresented: $shouldConfirmReset) {
             Button(L10n.string(.actionCancel), role: .cancel) {}
@@ -106,10 +130,12 @@ struct ContentView: View {
             scheduleNoticeDismiss()
         }
         .overlay {
-            if viewModel.isProcessing {
+            if viewModel.isProcessing || isPresentingResultGateAd {
                 ProcessingOverlay(
-                    title: viewModel.processingTitle,
-                    message: viewModel.processingMessage ?? L10n.string(.processingTitleWorking)
+                    title: isPresentingResultGateAd ? L10n.string(.adLoadingTitle) : viewModel.processingTitle,
+                    message: isPresentingResultGateAd
+                        ? L10n.string(.adLoadingMessage)
+                        : (viewModel.processingMessage ?? L10n.string(.processingTitleWorking))
                 )
             }
         }
@@ -121,6 +147,9 @@ struct ContentView: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
                     .zIndex(2)
             }
+        }
+        .task {
+            await monetization.start()
         }
     }
 
@@ -205,6 +234,47 @@ struct ContentView: View {
     private func analyze() {
         Task {
             if await viewModel.analyze() != nil {
+                beginResultPresentationFlow()
+            }
+        }
+    }
+
+    private func beginResultPresentationFlow() {
+        if monetization.shouldPresentResultGateAd() {
+            shouldShowResultGateIntro = true
+        } else {
+            shouldShowResult = true
+        }
+    }
+
+    private func handleResultGateIntroDismiss() {
+        guard shouldPresentResultGateAdAfterIntroDismiss else { return }
+        shouldPresentResultGateAdAfterIntroDismiss = false
+        presentResultGateAd()
+    }
+
+    private func presentResultGateAd() {
+        Task {
+            isPresentingResultGateAd = true
+            try? await Task.sleep(for: .milliseconds(300))
+            let outcome = await monetization.presentResultGateAd()
+            isPresentingResultGateAd = false
+
+            switch outcome {
+            case .completed:
+                shouldShowResult = true
+            case .skipped:
+                viewModel.transientNotice = UserNotice(
+                    title: L10n.string(.adResultGateSkippedTitle),
+                    message: L10n.string(.adResultGateSkippedMessage),
+                    style: .info
+                )
+            case .unavailable:
+                viewModel.transientNotice = UserNotice(
+                    title: L10n.string(.adResultGateUnavailableTitle),
+                    message: L10n.string(.adResultGateUnavailableMessage),
+                    style: .info
+                )
                 shouldShowResult = true
             }
         }
@@ -268,6 +338,8 @@ struct ContentView: View {
         motherPickerItems = []
         childPickerItem = nil
         shouldShowResult = false
+        shouldShowResultGateIntro = false
+        isPresentingResultGateAd = false
         viewModel.resetForDebugging()
     }
 

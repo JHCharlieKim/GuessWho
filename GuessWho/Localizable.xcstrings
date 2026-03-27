@@ -62,6 +62,329 @@
         }
       }
     },
+    "ad.banner.placeholder.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This area is reserved for a naturally placed banner ad."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 영역은 자연스럽게 배치되는 배너 광고 슬롯입니다."
+          }
+        }
+      }
+    },
+    "ad.banner.placeholder.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inline banner ad slot"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배너 광고 슬롯"
+          }
+        }
+      }
+    },
+    "ad.banner.sponsored" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sponsored"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sponsored"
+          }
+        }
+      }
+    },
+    "ad.loading.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparing the ad for result access..."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "결과 보기 전 광고를 준비하고 있어요..."
+          }
+        }
+      }
+    },
+    "ad.loading.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading ad"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고를 불러오고 있어요"
+          }
+        }
+      }
+    },
+    "ad.privacy.button" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 설정"
+          }
+        }
+      }
+    },
+    "ad.privacy.detail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If required by Google consent rules, users must be able to review and update privacy choices later."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 동의 정책에 따라 필요할 경우, 나중에도 개인정보 선택을 다시 열 수 있어야 합니다."
+          }
+        }
+      }
+    },
+    "ad.privacy.eyebrow" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        }
+      }
+    },
+    "ad.privacy.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage ad privacy choices"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 개인정보 선택 관리"
+          }
+        }
+      }
+    },
+    "ad.result_gate.confirm" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch ad and open result"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 보고 결과 보기"
+          }
+        }
+      }
+    },
+    "ad.result_gate.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sometimes we show a full-screen ad before opening the result to support the app. Finish watching the ad to unlock this result."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 수익화를 위해 일부 결과 열기 전에 전체 화면 광고가 표시될 수 있어요. 광고 시청이 끝나면 이번 결과를 열 수 있습니다."
+          }
+        }
+      }
+    },
+    "ad.result_gate.reward.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once the ad finishes, the current result opens immediately."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 시청이 완료되면 이번 분석 결과가 바로 열립니다."
+          }
+        }
+      }
+    },
+    "ad.result_gate.reward.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result unlock"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "결과 열기 안내"
+          }
+        }
+      }
+    },
+    "ad.result_gate.skip" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Later"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나중에 보기"
+          }
+        }
+      }
+    },
+    "ad.result_gate.skipped.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The result stays locked until the ad is completed."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 시청을 완료해야 이번 결과를 열 수 있어요."
+          }
+        }
+      }
+    },
+    "ad.result_gate.skipped.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result not opened"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "결과를 열지 않았어요"
+          }
+        }
+      }
+    },
+    "ad.result_gate.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch an ad before opening the result"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "결과 보기 전에 광고 시청이 필요해요"
+          }
+        }
+      }
+    },
+    "ad.result_gate.unavailable.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The ad was unavailable, so the result was opened right away."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고를 불러오지 못해 이번에는 바로 결과를 열어드렸어요."
+          }
+        }
+      }
+    },
+    "ad.result_gate.unavailable.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad unavailable"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고를 불러오지 못했어요"
+          }
+        }
+      }
+    },
     "alert.reset.message" : {
       "extractionState" : "stale",
       "localizations" : {

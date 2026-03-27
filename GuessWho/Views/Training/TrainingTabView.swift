@@ -39,6 +39,8 @@ struct TrainingTabView: View {
                             )
                         }
 
+                        InlineBannerAdSlot(placement: .trainingInline)
+
                         parentTrainingSection
                         postTrainingGuideSection
                         resetSection

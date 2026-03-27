@@ -69,6 +69,28 @@ struct GuessWhoTests {
         #expect(viewModel.fatherReady)
         #expect(viewModel.motherReady)
     }
+
+    @Test func resultGatePolicyUsesTwentyPercentThreshold() async throws {
+        let shouldShow = ResultGatePolicy(
+            probability: 0.20,
+            randomValueProvider: FixedRandomValueProvider(value: 0.19)
+        )
+        let shouldSkip = ResultGatePolicy(
+            probability: 0.20,
+            randomValueProvider: FixedRandomValueProvider(value: 0.20)
+        )
+
+        #expect(shouldShow.shouldPresentAd())
+        #expect(!shouldSkip.shouldPresentAd())
+    }
+}
+
+private struct FixedRandomValueProvider: RandomValueProviding {
+    let value: Double
+
+    func nextUnitIntervalValue() -> Double {
+        value
+    }
 }
 
 private func makeSample(role: ParentRole?, ordinal: Int, qualityScore: Double = 0.9) -> FaceSample {

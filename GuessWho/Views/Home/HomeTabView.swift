@@ -29,6 +29,8 @@ struct HomeTabView: View {
                                 onboardingHomeSection
                             }
 
+                            InlineBannerAdSlot(placement: .homeInline)
+
                             if let lastErrorMessage {
                                 InfoBanner(
                                     title: L10n.string(.noticePhotoProcessingTitle),
