@@ -7,13 +7,31 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WhoMe"
+            "value" : "WhoseFace"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WhoseFace"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "누구닮아"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WhoseFace"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WhoseFace"
           }
         }
       }
@@ -25,6 +43,24 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "GuessWho"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GuessWho"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GuessWho"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "GuessWho"
           }
         }
@@ -39,10 +75,28 @@
             "value" : "Photo access is required to analyze parent and child photos on this device and compare facial similarity."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この端末上で親子の写真を分析し、顔の類似度を比較するために写真へのアクセス権限が必要です。"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "부모와 자녀 사진을 기기 안에서만 분석해 닮은 정도를 계산하기 위해 사진 접근 권한이 필요합니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要访问照片，才能在这台设备上分析父母与孩子的照片并比较面部相似度。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要存取照片，才能在這台裝置上分析父母與孩子的照片並比較臉部相似度。"
           }
         }
       }

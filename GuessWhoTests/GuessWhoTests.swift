@@ -5,6 +5,7 @@
 //  Created by Charlie Kim on 3/23/26.
 //
 
+import Foundation
 import Testing
 @testable import GuessWho
 
@@ -70,18 +71,40 @@ struct GuessWhoTests {
         #expect(viewModel.motherReady)
     }
 
-    @Test func resultGatePolicyUsesTwentyPercentThreshold() async throws {
+    @MainActor
+    @Test func resultGatePolicyUsesThirtyPercentThreshold() async throws {
         let shouldShow = ResultGatePolicy(
-            probability: 0.20,
-            randomValueProvider: FixedRandomValueProvider(value: 0.19)
+            probability: 0.30,
+            randomValueProvider: FixedRandomValueProvider(value: 0.29)
         )
         let shouldSkip = ResultGatePolicy(
-            probability: 0.20,
-            randomValueProvider: FixedRandomValueProvider(value: 0.20)
+            probability: 0.30,
+            randomValueProvider: FixedRandomValueProvider(value: 0.30)
         )
 
         #expect(shouldShow.shouldPresentAd())
         #expect(!shouldSkip.shouldPresentAd())
+    }
+
+    @MainActor
+    @Test func resultGateSessionKeepsRequiringAdAfterSkipUntilResolved() async throws {
+        var session = ResultGateSession()
+        let firstAttemptRequiresAd = session.shouldRequireAd(using: true)
+
+        #expect(firstAttemptRequiresAd)
+        #expect(session.hasPendingAdRequirement)
+
+        session.resolve(with: .skipped)
+        let secondAttemptRequiresAd = session.shouldRequireAd(using: false)
+
+        #expect(secondAttemptRequiresAd)
+        #expect(session.hasPendingAdRequirement)
+
+        session.resolve(with: .completed)
+        let thirdAttemptRequiresAd = session.shouldRequireAd(using: false)
+
+        #expect(!session.hasPendingAdRequirement)
+        #expect(!thirdAttemptRequiresAd)
     }
 }
 

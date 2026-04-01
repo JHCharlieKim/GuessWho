@@ -37,7 +37,7 @@ struct ResultGatePolicy {
     private let randomValueProvider: RandomValueProviding
 
     static let `default` = ResultGatePolicy(
-        probability: 0.20,
+        probability: 0.30,
         randomValueProvider: SystemRandomValueProvider()
     )
 
@@ -51,6 +51,36 @@ struct ResultGatePolicy {
 
     func shouldPresentAd() -> Bool {
         randomValueProvider.nextUnitIntervalValue() < probability
+    }
+}
+
+struct ResultGateSession {
+    private(set) var hasPendingAdRequirement = false
+
+    mutating func shouldRequireAd(using policyDecision: @autoclosure () -> Bool) -> Bool {
+        if hasPendingAdRequirement {
+            return true
+        }
+
+        if policyDecision() {
+            hasPendingAdRequirement = true
+            return true
+        }
+
+        return false
+    }
+
+    mutating func resolve(with outcome: ResultGateAdOutcome) {
+        switch outcome {
+        case .completed, .unavailable:
+            hasPendingAdRequirement = false
+        case .skipped:
+            break
+        }
+    }
+
+    mutating func reset() {
+        hasPendingAdRequirement = false
     }
 }
 

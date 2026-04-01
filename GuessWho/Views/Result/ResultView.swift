@@ -4,6 +4,7 @@ struct ResultView: View {
     let summary: SimilaritySummary
     let childSample: FaceSample?
     @Environment(\.dismiss) private var dismiss
+    @State private var sharePayload: ResultSharePayload?
 
     private let palette = AppPalette()
 
@@ -48,11 +49,26 @@ struct ResultView: View {
                 }
             }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        sharePayload = ResultSharePayload.make(
+                            summary: summary,
+                            childSample: childSample,
+                            palette: palette
+                        )
+                    } label: {
+                        Label(L10n.string(.resultShareButton), systemImage: "square.and.arrow.up")
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(L10n.string(.actionClose)) {
                         dismiss()
                     }
                 }
+            }
+            .sheet(item: $sharePayload) { payload in
+                ActivityView(items: payload.items)
             }
         }
     }

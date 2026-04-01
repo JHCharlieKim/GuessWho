@@ -33,6 +33,7 @@ struct ContentView: View {
     @State private var shouldShowResultGateIntro = false
     @State private var shouldPresentResultGateAdAfterIntroDismiss = false
     @State private var isPresentingResultGateAd = false
+    @State private var resultGateSession = ResultGateSession()
     @State private var noticeDismissTask: Task<Void, Never>?
 
     private let palette = AppPalette()
@@ -240,7 +241,7 @@ struct ContentView: View {
     }
 
     private func beginResultPresentationFlow() {
-        if monetization.shouldPresentResultGateAd() {
+        if resultGateSession.shouldRequireAd(using: monetization.shouldPresentResultGateAd()) {
             shouldShowResultGateIntro = true
         } else {
             shouldShowResult = true
@@ -259,6 +260,7 @@ struct ContentView: View {
             try? await Task.sleep(for: .milliseconds(300))
             let outcome = await monetization.presentResultGateAd()
             isPresentingResultGateAd = false
+            resultGateSession.resolve(with: outcome)
 
             switch outcome {
             case .completed:
@@ -340,6 +342,7 @@ struct ContentView: View {
         shouldShowResult = false
         shouldShowResultGateIntro = false
         isPresentingResultGateAd = false
+        resultGateSession.reset()
         viewModel.resetForDebugging()
     }
 

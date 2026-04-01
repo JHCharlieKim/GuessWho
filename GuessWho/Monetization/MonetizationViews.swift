@@ -48,54 +48,42 @@ struct ResultGateIntroSheet: View {
     }
 }
 
+private enum InlineBannerDisplayState {
+    case loading
+    case loaded
+    case failed
+}
+
 struct InlineBannerAdSlot: View {
     let placement: BannerAdPlacement
+    @State private var displayState: InlineBannerDisplayState = .loading
+
+    private var slotHeight: CGFloat {
+        switch displayState {
+        case .loaded:
+            82
+        case .loading:
+            82
+        case .failed:
+            0
+        }
+    }
 
     var body: some View {
         GeometryReader { proxy in
             #if canImport(GoogleMobileAds)
             AdMobBannerSlot(
                 placement: placement,
-                availableWidth: max(proxy.size.width, 0)
+                availableWidth: max(proxy.size.width, 0),
+                displayState: $displayState
             )
-            .frame(width: proxy.size.width, height: 60)
+            .frame(width: proxy.size.width, height: slotHeight)
             #else
-            InlineAdPlaceholderCard()
-                .frame(width: proxy.size.width, height: 100, alignment: .leading)
+            Color.clear
             #endif
         }
-        .frame(height: 60)
-    }
-}
-
-private struct InlineAdPlaceholderCard: View {
-    var body: some View {
-        HStack(spacing: 14) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text(L10n.string(.adBannerSponsored))
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(.secondary)
-
-                Text(L10n.string(.adBannerPlaceholderTitle))
-                    .font(.headline)
-
-                Text(L10n.string(.adBannerPlaceholderMessage))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            Image(systemName: "megaphone.fill")
-                .font(.title2)
-                .foregroundStyle(.orange)
-        }
-        .padding(18)
-        .background(.white.opacity(0.82), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(.orange.opacity(0.16), lineWidth: 1)
-        }
+        .frame(maxWidth: .infinity)
+        .frame(height: slotHeight)
     }
 }
 
@@ -103,12 +91,13 @@ private struct InlineAdPlaceholderCard: View {
 private struct AdMobBannerSlot: UIViewRepresentable {
     let placement: BannerAdPlacement
     let availableWidth: CGFloat
+    @Binding var displayState: InlineBannerDisplayState
 
     func makeUIView(context: Context) -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = .clear
 
-        let bannerView = BannerView(adSize: AdSizeBanner)
+        let bannerView = BannerView()
         bannerView.adUnitID = AdMobConfiguration.bannerUnitID(for: placement)
         bannerView.rootViewController = UIApplication.shared.topMostViewController()
         bannerView.delegate = context.coordinator
@@ -123,12 +112,14 @@ private struct AdMobBannerSlot: UIViewRepresentable {
         ])
 
         context.coordinator.bannerView = bannerView
+        context.coordinator.displayState = $displayState
         MonetizationLogger.log("banner makeUIView placement=\(placement.logName) unitID=\(bannerView.adUnitID ?? "nil")")
         return containerView
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
         guard let bannerView = context.coordinator.bannerView else { return }
+        context.coordinator.displayState = $displayState
 
         bannerView.rootViewController = UIApplication.shared.topMostViewController()
         let width = resolvedWidth(for: bannerView)
@@ -137,7 +128,7 @@ private struct AdMobBannerSlot: UIViewRepresentable {
             return
         }
 
-        let adSize = AdSizeBanner
+        let adSize = largeAnchoredAdaptiveBanner(width: width)
         if isAdSizeEqualToSize(size1: bannerView.adSize, size2: adSize), context.coordinator.hasLoadedAd {
             return
         }
@@ -171,13 +162,24 @@ private struct AdMobBannerSlot: UIViewRepresentable {
     final class Coordinator: NSObject, BannerViewDelegate {
         private let placement: BannerAdPlacement
         weak var bannerView: BannerView?
+        var displayState: Binding<InlineBannerDisplayState>?
         var hasLoadedAd = false
 
         init(placement: BannerAdPlacement) {
             self.placement = placement
         }
 
+        func setDisplayState(_ state: InlineBannerDisplayState) {
+            guard displayState?.wrappedValue != state else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self, self.displayState?.wrappedValue != state else { return }
+                self.displayState?.wrappedValue = state
+            }
+        }
+
         func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+            setDisplayState(.loaded)
             MonetizationLogger.log(
                 "banner loaded placement=\(placement.logName) size=\(bannerView.bounds.width)x\(bannerView.bounds.height)"
             )
@@ -185,6 +187,7 @@ private struct AdMobBannerSlot: UIViewRepresentable {
 
         func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: any Error) {
             hasLoadedAd = false
+            setDisplayState(.failed)
             MonetizationLogger.log(
                 "banner failed placement=\(placement.logName) error=\(error.localizedDescription)"
             )
