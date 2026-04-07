@@ -2,9 +2,19 @@ import SwiftUI
 import UIKit
 
 enum ShareConfiguration {
-    static let appName = "GuessWho"
-    // Fill in the live App Store URL once the app is published.
-    static let appDownloadURL: URL? = nil
+    static var appName: String {
+        switch AppLanguage.current {
+        case .ko:
+            return "누구닮아"
+        case .en, .ja, .zhHans, .zhHant:
+            return "WhoseFace"
+        }
+    }
+
+    static var appDownloadURL: URL? {
+        let storefront = Locale.current.region?.identifier.lowercased() ?? "us"
+        return URL(string: "https://apps.apple.com/\(storefront)/app/whoseface/id6761482377")
+    }
 }
 
 struct ResultSharePayload: Identifiable {
