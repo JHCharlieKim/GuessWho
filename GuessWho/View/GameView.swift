@@ -74,26 +74,91 @@ let gameData: [String: [String]] = [
     ]
 ]
 
+enum GameMode: String, CaseIterable {
+    case easy = "쉬운 모드"
+    case hard = "어려운 모드"
+}
+
+enum GameCount: String, CaseIterable {
+    case ten = "10"
+    case twenty = "20"
+    case all = "전체"
+
+    var limit: Int? {
+        switch self {
+        case .ten: return 10
+        case .twenty: return 20
+        case .all: return nil
+        }
+    }
+}
+
 struct GameView: View {
     var title: String
     var subTitle: String
-    
+
+    @State private var mode: GameMode = .hard
+    @State private var count: GameCount = .ten
     @State private var showGuessView = false
-    
+    @State private var isFinished = false
+
     var body: some View {
-        Text("축하합니다.")
-            .navigationTitle(subTitle)
-            .fullScreenCover(isPresented: $showGuessView) {
-                GuessView(items: chooseRandomItems())
+        VStack(spacing: 30) {
+            if isFinished {
+                Text("축하합니다.")
+                    .font(.title)
+                    .fontWeight(.bold)
             }
-            .onAppear {
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("게임 모드")
+                    .font(.headline)
+                Picker("게임 모드", selection: $mode) {
+                    ForEach(GameMode.allCases, id: \.self) { mode in
+                        Text(mode.rawValue).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("게임 수")
+                    .font(.headline)
+                Picker("게임 수", selection: $count) {
+                    ForEach(GameCount.allCases, id: \.self) { count in
+                        Text(count.rawValue).tag(count)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+
+            Button {
+                isFinished = false
                 showGuessView = true
+            } label: {
+                Text("시작하기")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
             }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(.horizontal, 40)
+        .navigationTitle(subTitle)
+        .fullScreenCover(isPresented: $showGuessView) {
+            GuessView(items: chooseRandomItems(), pool: Array(Set(gameData.values.joined())), mode: mode) {
+                isFinished = true
+            }
+        }
     }
-    
+
     func chooseRandomItems() -> Array<String> {
         if let data = gameData[subTitle] {
-            return Array(data.shuffled())
+            let shuffled = data.shuffled()
+            if let limit = count.limit {
+                return Array(shuffled.prefix(limit))
+            }
+            return shuffled
         }
         return []
     }
